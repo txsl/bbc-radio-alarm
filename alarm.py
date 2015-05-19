@@ -34,8 +34,6 @@ for p in programmes:
         pid = p.a['href'].split("/")[-1]
         print "Found Today. PID = %s" % pid
 
-pid = 'b05v7tnb'
-
 # Check if we can download the file
 
 while True:
