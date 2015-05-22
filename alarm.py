@@ -1,7 +1,7 @@
 from datetime import date
 from subprocess import call
 from time import sleep
-import os
+import os, glob
 
 import requests
 from bs4 import BeautifulSoup
@@ -52,18 +52,19 @@ while True:
 date_substring = today.strftime("%d_%m_%Y")
 
 file_name = "today_%s_%s" % (date_substring, pid)
+directory = os.path.dirname(os.path.realpath(__file__))
 
-call(["get_iplayer", "--type=radio", "--get", "--pid=%s" % pid, "--file-prefix=%s" % file_name])
+call(["get_iplayer", "--type=radio", "--get", "--pid=%s" % pid, "--file-prefix=%s" % file_name, '--output=%s' % dirname])
 
 
 
 
 # Play the file
 
-directory = os.path.dirname(os.path.realpath(__file__))
+full_file = glob.glob('%s*' % file_name)[0]
 
 xbmc = XBMC(config.xmbc_json_uri)
 
-print xbmc.Player.Open({'item': {'file': directory + file_name + '.m4a'}})
+print xbmc.Player.Open({'item': {'file': directory + full_file}})
 
 
