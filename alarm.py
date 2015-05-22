@@ -1,11 +1,14 @@
 from datetime import date
 from subprocess import call
 from time import sleep
+import os
 
 import requests
 from bs4 import BeautifulSoup
+from xbmcjson import XBMC
 
 from utilities import bbc_is_available
+import config
 
 today = date.today()
 
@@ -51,5 +54,16 @@ date_substring = today.strftime("%d_%m_%Y")
 file_name = "today_%s_%s" % (date_substring, pid)
 
 call(["get_iplayer", "--type=radio", "--get", "--pid=%s" % pid, "--file-prefix=%s" % file_name])
+
+
+
+
+# Play the file
+
+directory = os.path.dirname(os.path.realpath(__file__))
+
+xbmc = XBMC(config.xmbc_json_uri)
+
+print xbmc.Player.Open({'item': {'file': directory + file_name + '.m4a'}})
 
 
