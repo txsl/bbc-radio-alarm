@@ -52,7 +52,7 @@ while True:
 date_substring = today.strftime("%d_%m_%Y")
 
 file_name = "today_%s_%s" % (date_substring, pid)
-directory = os.path.dirname(os.path.realpath(__file__))
+dirname = os.path.dirname(os.path.realpath(__file__))
 
 call(["get_iplayer", "--type=radio", "--get", "--pid=%s" % pid, "--file-prefix=%s" % file_name, '--output=%s' % dirname])
 
